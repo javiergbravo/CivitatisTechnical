@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="margin_default">8dp</dimen>
+
+    <!-- CardView -->
+    <dimen name="cv_corner_radius">5dp</dimen>
+    <dimen name="cv_elevation">8dp</dimen>
+    <dimen name="cv_padding_vertical">4dp</dimen>
+    <dimen name="cv_padding_horizontal">10dp</dimen>
+</resources>
