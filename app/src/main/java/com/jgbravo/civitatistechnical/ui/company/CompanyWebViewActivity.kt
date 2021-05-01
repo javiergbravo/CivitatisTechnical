@@ -1,14 +1,12 @@
 package com.jgbravo.civitatistechnical.ui.company
 
 import android.annotation.SuppressLint
-import android.net.http.SslError
 import android.os.Bundle
 import android.webkit.*
 import com.jgbravo.civitatistechnical.R
 import com.jgbravo.civitatistechnical.ui.NavigationConstants
 import com.jgbravo.civitatistechnical.ui.base.BaseActivity
 import dagger.hilt.android.AndroidEntryPoint
-import dagger.hilt.android.HiltAndroidApp
 
 @AndroidEntryPoint
 class CompanyWebViewActivity : BaseActivity() {
