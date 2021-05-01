@@ -25,6 +25,7 @@ class MainActivity : BaseActivity() {
     private lateinit var rvAdapter: JobResumeAdapter
 
     override fun getLayoutID(): Int = R.layout.activity_main
+    override fun toolbarTitle(): Int = R.string.job_list_title
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

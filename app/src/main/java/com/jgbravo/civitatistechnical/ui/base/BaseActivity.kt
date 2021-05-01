@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.ProgressBar
 import androidx.annotation.LayoutRes
+import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.jgbravo.civitatistechnical.R
@@ -20,12 +21,20 @@ abstract class BaseActivity : AppCompatActivity() {
 
     private fun onPostCreate() {
         setContentView(getLayoutID())
+        setUpToolbar()
         bindViews()
         configureViews()
     }
 
     @LayoutRes
     protected abstract fun getLayoutID(): Int
+
+    @StringRes
+    protected abstract fun toolbarTitle() : Int
+
+    protected open fun setUpToolbar() {
+        supportActionBar?.title = resources.getString(toolbarTitle())
+    }
 
     protected open fun bindViews() {
         container = findViewById(R.id.container)

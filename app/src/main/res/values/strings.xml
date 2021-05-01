@@ -1,4 +1,6 @@
 <resources>
     <string name="app_name">CivitatisTechnical</string>
-    <string name="job_details">Job details</string>
+    <string name="job_list_title">Job list</string>
+    <string name="job_details_title">Job details</string>
+    <string name="company_title">Company details</string>
 </resources>

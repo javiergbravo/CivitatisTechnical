@@ -1,6 +1,8 @@
 package com.jgbravo.civitatistechnical.ui.jobdetail
 
+import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.activity.viewModels
@@ -10,6 +12,7 @@ import com.jgbravo.civitatistechnical.R
 import com.jgbravo.civitatistechnical.data.dtos.entity.Job
 import com.jgbravo.civitatistechnical.ui.NavigationConstants
 import com.jgbravo.civitatistechnical.ui.base.BaseActivity
+import com.jgbravo.civitatistechnical.ui.company.CompanyWebViewActivity
 import com.jgbravo.civitatistechnical.utils.convertDateToShortString
 import com.jgbravo.civitatistechnical.utils.convertFromHTML
 import dagger.hilt.android.AndroidEntryPoint
@@ -31,6 +34,7 @@ class JobDetailActivity : BaseActivity() {
     private lateinit var jobDescription: TextView
 
     override fun getLayoutID(): Int = R.layout.activity_job_detail
+    override fun toolbarTitle(): Int = R.string.job_details_title
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,8 +43,8 @@ class JobDetailActivity : BaseActivity() {
         collectFlows()
     }
 
-    private fun setUpToolbar() {
-        supportActionBar?.title = resources.getString(R.string.job_details)
+    override fun setUpToolbar() {
+        super.setUpToolbar()
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
 
@@ -79,7 +83,18 @@ class JobDetailActivity : BaseActivity() {
                 .error(R.drawable.ic_image_error)
                 .fitCenter()
                 .into(companyLogo)
+
+            if (link.text.isNullOrEmpty()) {
+                link.visibility = View.GONE
+            } else {
+                link.setOnClickListener {
+                    val intent = Intent(this, CompanyWebViewActivity::class.java)
+                    intent.putExtra(NavigationConstants.LINK_BUNDLE, currentJob?.companyUrl)
+                    startActivity(intent)
+                }
+            }
         }
+
     }
 
     private fun collectFlows() {
