@@ -13,6 +13,6 @@
         android:scrollbars="vertical"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
-        tools:listitem="@layout/cardview_session" />
+        tools:listitem="@layout/job_resume_item" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

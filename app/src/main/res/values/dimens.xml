@@ -3,9 +3,6 @@
 
     <dimen name="margin_default">8dp</dimen>
 
-    <!-- CardView -->
-    <dimen name="cv_corner_radius">5dp</dimen>
-    <dimen name="cv_elevation">8dp</dimen>
-    <dimen name="cv_padding_vertical">4dp</dimen>
-    <dimen name="cv_padding_horizontal">10dp</dimen>
+    <dimen name="padding_vertical_small">4dp</dimen>
+    <dimen name="padding_horizontal_default">10dp</dimen>
 </resources>
