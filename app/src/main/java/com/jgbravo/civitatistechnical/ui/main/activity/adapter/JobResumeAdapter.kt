@@ -40,8 +40,12 @@ class JobResumeAdapter : RecyclerView.Adapter<JobResumeAdapter.JobViewHolder>() 
 
     override fun onBindViewHolder(holder: JobViewHolder, position: Int) {
         val job = differ.currentList[position]
-
         holder.bind(job, context)
+        setOnItemClickListener {
+            onItemClickListener?.let {
+                it(job)
+            }
+        }
     }
 
     override fun getItemCount(): Int = differ.currentList.size

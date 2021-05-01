@@ -2,11 +2,14 @@ package com.jgbravo.civitatistechnical.ui.main.activity
 
 import android.os.Bundle
 import android.view.View
+import android.widget.LinearLayout
 import android.widget.ProgressBar
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView
 import com.jgbravo.civitatistechnical.R
 import com.jgbravo.civitatistechnical.ui.main.activity.adapter.JobResumeAdapter
@@ -57,6 +60,7 @@ class MainActivity : AppCompatActivity() {
         rvAdapter = JobResumeAdapter()
         jobRecyclerView.apply {
             adapter = rvAdapter
+            addItemDecoration(DividerItemDecoration(this@MainActivity, LinearLayout.VERTICAL))
         }
         rvAdapter.setOnItemClickListener { job ->
             val result = "Job pressed" // TODO: borrar
