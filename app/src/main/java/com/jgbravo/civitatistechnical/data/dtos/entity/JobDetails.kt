@@ -8,7 +8,7 @@ data class JobDetails(
     val url: String?,
     val createdAt: Date,
     val company: String,
-    val companyUrl: String,
+    val companyUrl: String?,
     val location: String?,
     val title: String,
     val description: String?,

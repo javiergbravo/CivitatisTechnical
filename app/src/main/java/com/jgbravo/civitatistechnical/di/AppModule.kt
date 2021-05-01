@@ -2,6 +2,7 @@ package com.jgbravo.civitatistechnical.di
 
 import com.jgbravo.civitatistechnical.data.datasource.JobDataSource
 import com.jgbravo.civitatistechnical.data.datasource.JobDataSourceImpl
+import com.jgbravo.civitatistechnical.data.manager.JobsManager
 import com.jgbravo.civitatistechnical.data.manager.JobsManagerImpl
 import com.jgbravo.civitatistechnical.data.remote.JobsApi
 import com.jgbravo.civitatistechnical.data.remote.adapter.DateAdapter
@@ -41,5 +42,5 @@ object AppModule {
 
     @Singleton
     @Provides
-    fun provideJobManager(datasource: JobDataSource) = JobsManagerImpl(datasource)
+    fun provideJobManager(datasource: JobDataSource): JobsManager = JobsManagerImpl(datasource)
 }

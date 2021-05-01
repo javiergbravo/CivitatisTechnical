@@ -8,7 +8,7 @@ import java.util.*
 class DateAdapter {
 
     companion object {
-        const val FULL_PATTERN = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
+        const val FULL_PATTERN = "EEE MMM dd HH:mm:ss z yyyy"
     }
 
     private val df = SimpleDateFormat(FULL_PATTERN, Locale.getDefault())
@@ -21,11 +21,14 @@ class DateAdapter {
     }
 
     @FromJson
-    fun fromJson(source: String): Date? {
-        val date = df.parse(source)
-        date?.let {
-            it.time += df.timeZone.rawOffset
+    fun fromJson(source: String?): Date? = try {
+        if (source == null) {
+            null
+        } else {
+            df.parse(source)
         }
-        return date
+    } catch (e: Exception) {
+        null
     }
+
 }

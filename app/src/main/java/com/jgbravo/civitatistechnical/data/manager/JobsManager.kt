@@ -7,5 +7,5 @@ import java.util.*
 
 interface JobsManager {
 
-    fun getJobsFilteredByDate(date: Date): Flow<Resource<JobDetails>>
+    fun getJobsFilteredByDaysAgo(daysAgo: Int): Flow<Resource<JobDetails>>
 }

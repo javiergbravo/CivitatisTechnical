@@ -3,17 +3,17 @@ package com.jgbravo.civitatistechnical.data.manager
 import com.jgbravo.civitatistechnical.data.datasource.JobDataSource
 import com.jgbravo.civitatistechnical.data.dtos.entity.JobDetails
 import com.jgbravo.civitatistechnical.data.remote.utils.Resource
+import com.jgbravo.civitatistechnical.utils.getDateFromDaysAgo
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flow
-import java.util.*
 import javax.inject.Inject
 
 class JobsManagerImpl @Inject constructor(
     private val datasource: JobDataSource
 ) : JobsManager {
 
-    override fun getJobsFilteredByDate(date: Date): Flow<Resource<JobDetails>> = flow {
+    override fun getJobsFilteredByDaysAgo(daysAgo: Int): Flow<Resource<JobDetails>> = flow {
         emit(Resource.Loading)
 
         datasource.getAllJobs().collect { resourceList ->
@@ -25,10 +25,13 @@ class JobsManagerImpl @Inject constructor(
                     emit(Resource.Error())
                 }
                 is Resource.Success -> {
-                    (resourceList.data as List<JobDetails>).forEach { job ->
-                        emit(Resource.Success<JobDetails>(job))
-                        //TODO: filter
-                    }
+                    (resourceList.data as List<JobDetails>)
+                        .sortedBy { it.createdAt }
+                        .forEach { job ->
+                            if (job.createdAt.after(getDateFromDaysAgo(daysAgo))) {
+                                emit(Resource.Success<JobDetails>(job))
+                            }
+                        }
                 }
             }
         }
