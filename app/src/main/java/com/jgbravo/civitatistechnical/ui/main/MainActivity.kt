@@ -1,50 +1,38 @@
-package com.jgbravo.civitatistechnical.ui.main.activity
+package com.jgbravo.civitatistechnical.ui.main
 
+import android.content.Intent
 import android.os.Bundle
-import android.view.View
 import android.widget.LinearLayout
-import android.widget.ProgressBar
 import androidx.activity.viewModels
-import androidx.appcompat.app.AppCompatActivity
-import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView
 import com.jgbravo.civitatistechnical.R
-import com.jgbravo.civitatistechnical.ui.main.activity.adapter.JobResumeAdapter
+import com.jgbravo.civitatistechnical.ui.NavigationConstants
+import com.jgbravo.civitatistechnical.ui.base.BaseActivity
+import com.jgbravo.civitatistechnical.ui.jobdetail.JobDetailActivity
+import com.jgbravo.civitatistechnical.ui.main.adapter.JobResumeAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 
 @AndroidEntryPoint
-class MainActivity : AppCompatActivity() {
+class MainActivity : BaseActivity() {
 
     private val viewModel: MainViewModel by viewModels()
 
-    private lateinit var container: ConstraintLayout
-    private lateinit var loader: ProgressBar
     private lateinit var jobRecyclerView: RecyclerView
 
     private lateinit var rvAdapter: JobResumeAdapter
 
-    protected fun getLayoutID(): Int = R.layout.activity_main
+    override fun getLayoutID(): Int = R.layout.activity_main
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        onPostCreate()
         collectFlows()
     }
 
-    protected fun onPostCreate() {
-        setContentView(getLayoutID())
-        bindViews()
-        configureViews()
-    }
-
-    protected fun bindViews() {
-        container = findViewById(R.id.container)
-        loader = findViewById(R.id.loader)
+    override fun bindViews() {
+        super.bindViews()
         jobRecyclerView = findViewById(R.id.jobRecycler)
     }
 
@@ -56,14 +44,16 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun configureViews() {
+    override fun configureViews() {
         rvAdapter = JobResumeAdapter()
         jobRecyclerView.apply {
             adapter = rvAdapter
             addItemDecoration(DividerItemDecoration(this@MainActivity, LinearLayout.VERTICAL))
         }
         rvAdapter.setOnItemClickListener { job ->
-            val result = "Job pressed" // TODO: borrar
+            val intent = Intent(this, JobDetailActivity::class.java)
+            intent.putExtra(NavigationConstants.JOB_BUNDLE, job.id)
+            startActivity(intent)
         }
     }
 
@@ -75,7 +65,7 @@ class MainActivity : AppCompatActivity() {
                         showLoader()
                     }
                     is MainViewModel.MainState.Error -> {
-
+                        hideLoader()
                     }
                     is MainViewModel.MainState.Success -> {
                         rvAdapter.submitList(state.jobList)
@@ -85,15 +75,5 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
-    }
-
-    protected fun showLoader() {
-        container.visibility = View.GONE
-        loader.visibility = View.VISIBLE
-    }
-
-    protected fun hideLoader() {
-        container.visibility = View.VISIBLE
-        loader.visibility = View.GONE
     }
 }

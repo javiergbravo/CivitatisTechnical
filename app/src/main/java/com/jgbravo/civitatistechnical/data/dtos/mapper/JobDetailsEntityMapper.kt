@@ -1,12 +1,12 @@
 package com.jgbravo.civitatistechnical.data.dtos.mapper
 
-import com.jgbravo.civitatistechnical.data.dtos.entity.JobDetails
+import com.jgbravo.civitatistechnical.data.dtos.entity.Job
 import com.jgbravo.civitatistechnical.data.dtos.indto.JobInDTO
 import com.jgbravo.civitatistechnical.data.remote.exceptions.IllegalMappingException
 
-class JobDetailsEntityMapper : Mapper<JobInDTO, JobDetails> {
+class JobDetailsEntityMapper : Mapper<JobInDTO, Job> {
 
-    override suspend fun map(model: JobInDTO): JobDetails = JobDetails(
+    override suspend fun map(model: JobInDTO): Job = Job(
         id = model.id ?: throw IllegalMappingException("id"),
         type = model.type,
         url = model.url,
@@ -14,8 +14,8 @@ class JobDetailsEntityMapper : Mapper<JobInDTO, JobDetails> {
         company = model.company ?: throw IllegalMappingException("company"),
         companyUrl = model.companyUrl,
         location = model.location,
-        title = model.title  ?: throw IllegalMappingException("title"),
-        description = model.description,
+        title = model.title ?: throw IllegalMappingException("title"),
+        description = model.description ?: throw IllegalMappingException("description"),
         howToApply = model.howToApply,
         companyLogo = model.companyLogo
     )

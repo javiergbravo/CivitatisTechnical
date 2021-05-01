@@ -1,6 +1,6 @@
 package com.jgbravo.civitatistechnical.data.datasource
 
-import com.jgbravo.civitatistechnical.data.dtos.entity.JobDetails
+import com.jgbravo.civitatistechnical.data.dtos.entity.Job
 import com.jgbravo.civitatistechnical.data.dtos.mapper.JobDetailsEntityMapper
 import com.jgbravo.civitatistechnical.data.dtos.mapper.forLists
 import com.jgbravo.civitatistechnical.data.remote.JobsApi
@@ -14,14 +14,14 @@ class JobDataSourceImpl @Inject constructor(
     private val api: JobsApi
 ) : JobDataSource {
 
-    override fun getAllJobs(): Flow<Resource<List<JobDetails>>> = flow {
+    override fun getAllJobs(): Flow<Resource<List<Job>>> = flow {
         emit(Resource.Loading)
         try {
             val response = api.getAllJobs()
             if (response.isSuccessful && response.body() != null) {
-                val jobList: List<JobDetails> =
+                val jobList: List<Job> =
                     JobDetailsEntityMapper().forLists().invoke(response.body()!!)
-                emit(Resource.Success<List<JobDetails>>(jobList))
+                emit(Resource.Success<List<Job>>(jobList))
             } else {
                 emit(Resource.Error())
             }

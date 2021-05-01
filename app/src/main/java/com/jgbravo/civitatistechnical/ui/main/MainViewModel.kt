@@ -1,17 +1,14 @@
-package com.jgbravo.civitatistechnical.ui.main.activity
+package com.jgbravo.civitatistechnical.ui.main
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.jgbravo.civitatistechnical.data.dtos.entity.JobDetails
+import com.jgbravo.civitatistechnical.data.dtos.entity.Job
 import com.jgbravo.civitatistechnical.data.manager.JobsManager
 import com.jgbravo.civitatistechnical.data.remote.utils.Resource
-import com.jgbravo.civitatistechnical.utils.getDateFromDaysAgo
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.*
-import java.util.*
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.collect
 import javax.inject.Inject
-import kotlin.collections.ArrayList
 
 @HiltViewModel
 class MainViewModel @Inject constructor(
@@ -21,14 +18,14 @@ class MainViewModel @Inject constructor(
     sealed class MainState {
         object NotStarted : MainState()
         object Loading : MainState()
-        class Success(val jobList: List<JobDetails>) : MainState()
+        class Success(val jobList: List<Job>) : MainState()
         class Error(val errorMsg: String) : MainState()
     }
 
     private val _jobState = MutableStateFlow<MainState>(MainState.NotStarted)
     val jobState: StateFlow<MainState> get() = _jobState
 
-    private val jobList = ArrayList<JobDetails>()
+    private val jobList = ArrayList<Job>()
 
     suspend fun getJobs() {
         jobsManager.getJobsFilteredByDaysAgo(5).collect { resource ->
@@ -42,7 +39,7 @@ class MainViewModel @Inject constructor(
                     _jobState.value = MainState.Error(resource.message.toString())
                 }
                 is Resource.Success -> {
-                    jobList.add(resource.data as JobDetails)
+                    jobList.add(resource.data as Job)
                     _jobState.value = MainState.Success(
                         jobList
                     )

@@ -2,7 +2,7 @@ package com.jgbravo.civitatistechnical.data.dtos.entity
 
 import java.util.*
 
-data class JobDetails(
+data class Job(
     val id: String,
     val type: String?,
     val url: String?,
@@ -11,7 +11,7 @@ data class JobDetails(
     val companyUrl: String?,
     val location: String?,
     val title: String,
-    val description: String?,
+    val description: String,
     val howToApply: String?,
     val companyLogo: String?
 )
