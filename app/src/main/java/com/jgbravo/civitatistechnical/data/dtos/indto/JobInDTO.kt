@@ -1,32 +1,30 @@
 package com.jgbravo.civitatistechnical.data.dtos.indto
 
 
-import com.squareup.moshi.Json
-import com.squareup.moshi.JsonClass
+import com.google.gson.annotations.SerializedName
 import java.util.*
 
-@JsonClass(generateAdapter = true)
 data class JobInDTO(
-    @Json(name = "id")
+    @SerializedName("id")
     val id: String?,
-    @Json(name = "type")
+    @SerializedName("type")
     val type: String?,
-    @Json(name = "url")
+    @SerializedName("url")
     val url: String?,
-    @Json(name = "created_at")
+    @SerializedName("created_at")
     val createdAt: Date?,
-    @Json(name = "company")
+    @SerializedName("company")
     val company: String?,
-    @Json(name = "company_url")
+    @SerializedName("company_url")
     val companyUrl: String?,
-    @Json(name = "location")
+    @SerializedName("location")
     val location: String?,
-    @Json(name = "title")
+    @SerializedName("title")
     val title: String?,
-    @Json(name = "description")
+    @SerializedName("description")
     val description: String?,
-    @Json(name = "how_to_apply")
+    @SerializedName("how_to_apply")
     val howToApply: String?,
-    @Json(name = "company_logo")
+    @SerializedName("company_logo")
     val companyLogo: String?
 )
