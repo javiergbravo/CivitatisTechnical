@@ -57,6 +57,7 @@ class JobResumeAdapter : RecyclerView.Adapter<JobResumeAdapter.JobViewHolder>() 
         private val jobTitle = itemView.findViewById<TextView>(R.id.job_title)
         private val companyName = itemView.findViewById<TextView>(R.id.company_name)
         private val companyLogo = itemView.findViewById<ImageView>(R.id.company_logo)
+        private val type = itemView.findViewById<TextView>(R.id.type)
         private val location = itemView.findViewById<TextView>(R.id.location)
         private val createdDay = itemView.findViewById<TextView>(R.id.created_day)
 
@@ -64,7 +65,16 @@ class JobResumeAdapter : RecyclerView.Adapter<JobResumeAdapter.JobViewHolder>() 
             jobTitle.text = job.title
             companyName.text = job.company
             location.text = job.location
-            createdDay.text = convertDateToShortString(job.createdAt)
+            if (job.type == null) {
+                type.visibility = View.GONE
+            } else {
+                type.text = job.type
+            }
+            if (job.createdAt == null) {
+                createdDay.visibility = View.GONE
+            } else {
+                createdDay.text = convertDateToShortString(job.createdAt)
+            }
 
 
             itemView.setOnClickListener {

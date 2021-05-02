@@ -68,15 +68,26 @@
             app:constraint_referenced_ids="company_logo, location" />
 
         <TextView
+            android:id="@+id/type"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_default"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:textColor="@color/black"
+            app:layout_constraintTop_toBottomOf="@id/barrier_logo"
+            tools:text="Full time" />
+
+        <TextView
             android:id="@+id/link"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/margin_long"
+            android:layout_margin="@dimen/margin_default"
             android:ellipsize="end"
             android:maxLines="1"
             android:textColor="@color/link_color"
             android:textStyle="italic"
-            app:layout_constraintTop_toBottomOf="@id/barrier_logo"
+            app:layout_constraintTop_toBottomOf="@id/type"
             tools:text="https://flightaware.com/" />
 
         <TextView

@@ -28,7 +28,9 @@ class JobsManagerImpl @Inject constructor(
                     (resourceList.data as List<Job>)
                         .sortedBy { it.createdAt }
                         .forEach { job ->
-                            if (job.createdAt.after(getDateFromDaysAgo(daysAgo))) {
+                            if (job.createdAt == null) {
+                                emit(Resource.Success<Job>(job))
+                            } else if (job.createdAt.after(getDateFromDaysAgo(daysAgo))) {
                                 emit(Resource.Success<Job>(job))
                             }
                         }

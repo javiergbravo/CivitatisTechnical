@@ -10,13 +10,12 @@ class JobDetailsEntityMapper : Mapper<JobInDTO, Job> {
         id = model.id ?: throw IllegalMappingException("id"),
         type = model.type,
         url = model.url,
-        createdAt = model.createdAt  ?: throw IllegalMappingException("createAt"),
+        createdAt = model.createdAt,
         company = model.company ?: throw IllegalMappingException("company"),
         companyUrl = model.companyUrl,
         location = model.location,
         title = model.title ?: throw IllegalMappingException("title"),
         description = model.description ?: throw IllegalMappingException("description"),
-        howToApply = model.howToApply,
         companyLogo = model.companyLogo
     )
 }

@@ -30,6 +30,7 @@ class JobDetailActivity : BaseActivity() {
     private lateinit var companyName: TextView
     private lateinit var companyLogo: ImageView
     private lateinit var location: TextView
+    private lateinit var type: TextView
     private lateinit var link: TextView
     private lateinit var createdDay: TextView
     private lateinit var jobDescription: TextView
@@ -65,22 +66,32 @@ class JobDetailActivity : BaseActivity() {
         companyName = findViewById(R.id.company_name)
         companyLogo = findViewById(R.id.company_logo)
         location = findViewById(R.id.location)
+        type = findViewById(R.id.type)
         link = findViewById(R.id.link)
         createdDay = findViewById(R.id.created_day)
         jobDescription = findViewById(R.id.job_description)
     }
 
     override fun configureViews() {
-        currentJob?.let {
-            jobTitle.text = it.title
-            companyName.text = it.company
-            location.text = it.location
-            link.text = it.companyUrl ?: ""
-            createdDay.text = convertDateToShortString(it.createdAt)
-            jobDescription.text = it.description.convertFromHTML()
+        currentJob?.let { job ->
+            jobTitle.text = job.title
+            companyName.text = job.company
+            location.text = job.location
+            link.text = job.companyUrl ?: ""
+            if (job.type == null) {
+                type.visibility = View.GONE
+            } else {
+                type.text = job.type
+            }
+            if (job.createdAt == null) {
+                createdDay.visibility = View.GONE
+            } else {
+                createdDay.text = convertDateToShortString(job.createdAt)
+            }
+            jobDescription.text = job.description.convertFromHTML()
 
             Glide.with(this)
-                .load(it.companyLogo)
+                .load(job.companyLogo)
                 .error(R.drawable.ic_image_error)
                 .fitCenter()
                 .into(companyLogo)
