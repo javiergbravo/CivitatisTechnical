@@ -14,8 +14,7 @@ fun getDateFromDaysAgo(daysAgo: Int): Date {
 }
 
 fun convertDateToShortString(date: Date): String {
-    val pattern = "EEE dd MMM yyyy"
-    val simpleDateFormat = SimpleDateFormat(pattern, Locale.getDefault())
+    val simpleDateFormat = SimpleDateFormat(DateConstants.SHORT_PATTERN, Locale.getDefault())
     return try {
         simpleDateFormat.format(date) ?: date.toString()
     } catch (e: Exception) {
