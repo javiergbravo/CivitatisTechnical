@@ -3,4 +3,5 @@
     <string name="job_list_title">Job list</string>
     <string name="job_details_title">Job details</string>
     <string name="company_title">Company details</string>
+    <string name="default_error">An error has occurred</string>
 </resources>

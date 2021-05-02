@@ -12,6 +12,7 @@ import com.jgbravo.civitatistechnical.R
 abstract class BaseActivity : AppCompatActivity() {
 
     private lateinit var container: ConstraintLayout
+    private lateinit var error: ConstraintLayout
     private lateinit var loader: ProgressBar
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,6 +39,7 @@ abstract class BaseActivity : AppCompatActivity() {
 
     protected open fun bindViews() {
         container = findViewById(R.id.container)
+        error = findViewById(R.id.error_container)
         loader = findViewById(R.id.loader)
     }
 
@@ -45,11 +47,18 @@ abstract class BaseActivity : AppCompatActivity() {
 
     protected fun showLoader() {
         container.visibility = View.GONE
+        error.visibility = View.GONE
         loader.visibility = View.VISIBLE
     }
 
     protected fun hideLoader() {
         container.visibility = View.VISIBLE
         loader.visibility = View.GONE
+    }
+
+    protected fun showError() {
+        container.visibility = View.GONE
+        loader.visibility = View.GONE
+        error.visibility = View.VISIBLE
     }
 }

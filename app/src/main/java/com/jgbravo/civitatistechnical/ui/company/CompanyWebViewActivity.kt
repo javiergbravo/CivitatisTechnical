@@ -64,6 +64,7 @@ class CompanyWebViewActivity : BaseActivity() {
                 errorResponse: WebResourceResponse?
             ) {
                 super.onReceivedHttpError(view, request, errorResponse)
+                showError()
             }
 
             override fun onReceivedError(
@@ -72,6 +73,7 @@ class CompanyWebViewActivity : BaseActivity() {
                 error: WebResourceError?
             ) {
                 super.onReceivedError(view, request, error)
+                showError()
             }
 
         }

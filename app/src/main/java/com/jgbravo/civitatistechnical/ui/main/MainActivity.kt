@@ -66,7 +66,7 @@ class MainActivity : BaseActivity() {
                         showLoader()
                     }
                     is MainViewModel.MainState.Error -> {
-                        hideLoader()
+                        showError()
                     }
                     is MainViewModel.MainState.Success -> {
                         rvAdapter.submitList(state.jobList)

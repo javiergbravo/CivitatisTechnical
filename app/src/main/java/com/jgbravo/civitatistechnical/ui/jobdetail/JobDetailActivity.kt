@@ -118,7 +118,7 @@ class JobDetailActivity : BaseActivity() {
                         showLoader()
                     }
                     is JobDetailViewModel.JobDetailState.Error -> {
-                        hideLoader()
+                        showError()
                     }
                     is JobDetailViewModel.JobDetailState.Success -> {
                         currentJob = state.job
