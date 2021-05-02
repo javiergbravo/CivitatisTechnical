@@ -8,7 +8,7 @@ import java.util.*
 class DateAdapter {
 
     companion object {
-        const val FULL_PATTERN = "EEE MMM dd HH:mm:ss z yyyy"
+        const val FULL_PATTERN = "EEE MMM d HH:mm:ss z yyyy"
     }
 
     private val df = SimpleDateFormat(FULL_PATTERN, Locale.getDefault())
